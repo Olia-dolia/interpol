@@ -1,2 +1,13 @@
-package com.example.interpol.controllers;public class MainController {
+package com.example.interpol.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class MainController {
+
+    @GetMapping("main")
+    public String main() {
+        return "main";
+    }
 }

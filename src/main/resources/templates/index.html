@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Welcome Page</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/dist/css/bootstrap.css}">
 </head>
 <body>
+   <div class="container align-content-center p-2 bd-highlight">
     <h1>
         Hi! Please, approve your person!
     </h1>
+           <p>Tap there to see details</p>
+       <a href="main" class="btn btn-primary" role="button">TAP</a>
+   </div>
+   <!-- <a th:href="@{/main.html}" role="button" class="btn btn-primary">Tap There</a> with get method do-->
 </body>
 </html>
