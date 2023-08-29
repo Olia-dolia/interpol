@@ -18,7 +18,7 @@ public class Language {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "language")
+    @Column(name = "language", unique = true, nullable = false)
     private String language;
 
     @ManyToOne

@@ -1,4 +1,7 @@
 package com.example.interpol.repositories;
 
-public interface StatusRepository extends org.springframework.data.jpa.repository.JpaRepository<com.example.interpol.entities.Status, java.lang.Long> {
+import com.example.interpol.entities.Status;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StatusRepository extends JpaRepository<Status, Long> {
 }

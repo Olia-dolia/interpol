@@ -21,7 +21,7 @@ public class Profession {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "title", unique = true)
     private String title;
 
     @OneToMany(mappedBy = "profession", orphanRemoval = true)

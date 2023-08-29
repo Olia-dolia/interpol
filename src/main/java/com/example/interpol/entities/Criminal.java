@@ -97,4 +97,20 @@ public class Criminal {
         this.status = status;
         this.lastCase = lastCase;
     }
+
+    public Criminal(String firstName, String lastName, String alias, Double height, String eyesColor,
+                    String hairColor, String specialSigns, String nationality, String placeOfBirth,
+                    LocalDate dateOfBirth, String lastPlaceOfResidence) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.alias = alias;
+        this.height = height;
+        this.eyesColor = eyesColor;
+        this.hairColor = hairColor;
+        this.specialSigns = specialSigns;
+        this.nationality = nationality;
+        this.placeOfBirth = placeOfBirth;
+        this.dateOfBirth = dateOfBirth;
+        this.lastPlaceOfResidence = lastPlaceOfResidence;
+    }
 }

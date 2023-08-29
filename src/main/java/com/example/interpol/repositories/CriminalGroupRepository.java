@@ -1,4 +1,11 @@
 package com.example.interpol.repositories;
 
-public interface CriminalGroupRepository extends org.springframework.data.jpa.repository.JpaRepository<com.example.interpol.entities.CriminalGroup, java.lang.Long> {
+import com.example.interpol.entities.Criminal;
+import com.example.interpol.entities.CriminalGroup;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.Set;
+
+public interface CriminalGroupRepository extends JpaRepository<CriminalGroup, Long> {
 }

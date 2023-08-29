@@ -1,4 +1,7 @@
 package com.example.interpol.repositories;
 
-public interface LastCaseRepository extends org.springframework.data.jpa.repository.JpaRepository<com.example.interpol.entities.LastCase, java.lang.Long> {
+import com.example.interpol.entities.LastCase;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LastCaseRepository extends JpaRepository<LastCase, Long> {
 }

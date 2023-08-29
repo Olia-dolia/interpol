@@ -1,4 +1,8 @@
 package com.example.interpol.repositories;
 
-public interface CriminalRepository extends org.springframework.data.jpa.repository.JpaRepository<com.example.interpol.entities.Criminal, java.lang.Long> {
+import com.example.interpol.entities.Criminal;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CriminalRepository extends JpaRepository<Criminal, Long> {
+    Criminal findAllById(long l);
 }

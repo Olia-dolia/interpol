@@ -34,10 +34,21 @@ public class CriminalGroup {
     @OneToMany(mappedBy = "criminalGroup", orphanRemoval = true)
     private Set<Criminal> criminals = new LinkedHashSet<>();
 
-    public CriminalGroup(String name, Integer numberOfParticipants, CriminalType criminalType, Set<Criminal> criminals) {
+    public CriminalGroup(String name, CriminalType criminalType, Set<Criminal> criminals) {
         this.name = name;
-        this.numberOfParticipants = numberOfParticipants;
+        this.numberOfParticipants = criminals.size();
         this.criminalType = criminalType;
         this.criminals = criminals;
+    }
+
+    public CriminalGroup(String name) {
+        this.name = name;
+        this.numberOfParticipants = 0;
+    }
+
+    public CriminalGroup(String name, CriminalType criminalType) {
+        this.name = name;
+        this.numberOfParticipants = 0;
+        this.criminalType = criminalType;;
     }
 }
