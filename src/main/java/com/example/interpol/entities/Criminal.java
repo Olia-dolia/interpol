@@ -7,19 +7,18 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
 @Table(name = "criminal")
 @Entity
 public class Criminal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @Column(name = "first_name", nullable = false)
@@ -50,13 +49,14 @@ public class Criminal {
     private String placeOfBirth;
 
     @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;//mb use calendar?
+    private LocalDate dateOfBirth;
 
     @Column(name = "last_place_of_residence")
     private String lastPlaceOfResidence;
 
-    @OneToMany(mappedBy = "criminal", orphanRemoval = true)
-    private Set<Language> languages = new LinkedHashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "profession_id")
@@ -67,17 +67,16 @@ public class Criminal {
     private CriminalGroup criminalGroup;
 
     @ManyToOne
-    @JoinColumn(name = "status_id")
-    private Status status;
-
-    @ManyToOne
     @JoinColumn(name = "last_case_id")
     private LastCase lastCase;
+
+    @OneToMany(mappedBy = "criminal", orphanRemoval = true)
+    private List<Language> languages = new ArrayList<>();
 
     public Criminal(String firstName, String lastName, String alias, Double height,
                     String eyesColor, String hairColor, String specialSigns,
                     String nationality, String placeOfBirth, LocalDate dateOfBirth,
-                    String lastPlaceOfResidence, Set<Language> languages,
+                    String lastPlaceOfResidence, List<Language> languages,
                     Profession profession, CriminalGroup criminalGroup, Status status,
                     LastCase lastCase) {
         this.firstName = firstName;

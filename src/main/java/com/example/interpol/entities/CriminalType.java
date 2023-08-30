@@ -14,13 +14,12 @@ import java.util.Set;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
 @Table(name = "criminal_type")
 @Entity
 public class CriminalType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id",unique = true, nullable = false)
     private Long id;
 
     @Column(name = "name_type")

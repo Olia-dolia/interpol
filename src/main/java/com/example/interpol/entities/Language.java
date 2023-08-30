@@ -9,13 +9,12 @@ import lombok.ToString;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
 @Table(name = "language")
 @Entity
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @Column(name = "language", unique = true, nullable = false)

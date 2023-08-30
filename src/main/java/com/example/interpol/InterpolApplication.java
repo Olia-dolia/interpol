@@ -26,12 +26,12 @@ public class InterpolApplication {
     public CommandLineRunner run(LanguageRepository lr, ProfessionRepository pr, CriminalRepository cr,
                                  CriminalGroupRepository crg, StatusRepository sr, CriminalTypeRepository crt) {
         return (args) -> {
-           /* fillLanguages(lr);
-            fillProfessions(pr);
-            fillStatus(sr);
-            fillCriminals(cr);
-            fillCriminalTypes(crt);
-            fillCriminalGroups(crg);*/
+//            fillLanguages(lr);
+//            fillProfessions(pr);
+//            fillStatus(sr);
+//            fillCriminals(cr);
+//            fillCriminalTypes(crt);
+//            fillCriminalGroups(crg);
 
             //repository.findAll().forEach(System.out::println);
 
