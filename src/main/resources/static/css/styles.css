@@ -1,0 +1,12 @@
+td.td-header{
+    background: lightslategrey;
+    font-size: large;
+    font-weight: bold;
+}
+/*thead > tr > td{
+    background: lightslategrey;
+    font-size: large;
+}*/
+body{
+    background-color: #faf8ff;
+}

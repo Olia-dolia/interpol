@@ -15,4 +15,12 @@ public class CriminalsService {
     public List<Criminal> getCriminals(){
         return criminalRepository.findAll();
     }
+
+    public List<Criminal> getOutOfGameCriminals(){
+        return criminalRepository.findCriminalsByStatusStatus("Out of game");
+    }
+
+    public Integer getParticipantsByCriminalGroupId(Long id){
+        return criminalRepository.findCriminalByCriminalGroupId(id).size();
+    }
 }

@@ -1,12 +1,14 @@
 package com.example.interpol.entities;
 
+import com.example.interpol.repositories.CriminalRepository;
+import com.example.interpol.services.CriminalsService;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -33,21 +35,29 @@ public class CriminalGroup {
     @OneToMany(mappedBy = "criminalGroup", orphanRemoval = true)
     private Set<Criminal> criminals = new LinkedHashSet<>();
 
-    public CriminalGroup(String name, CriminalType criminalType, Set<Criminal> criminals) {
+    public CriminalGroup(String name, CriminalType criminalType, Set<Criminal> criminals, CriminalRepository cr) {
         this.name = name;
-        this.numberOfParticipants = criminals.size();
+        this.numberOfParticipants = getCriminals().size();
         this.criminalType = criminalType;
-        this.criminals = criminals;
+        this.criminals = getCriminals();
     }
 
     public CriminalGroup(String name) {
         this.name = name;
-        this.numberOfParticipants = 0;
+        this.numberOfParticipants = getCriminals().size();
     }
 
     public CriminalGroup(String name, CriminalType criminalType) {
         this.name = name;
-        this.numberOfParticipants = 0;
+        this.numberOfParticipants = getNumberOfParticipants();
         this.criminalType = criminalType;;
+    }
+
+    public void setNumberOfParticipants(CriminalsService cs, Long id) {
+        this.numberOfParticipants = cs.getParticipantsByCriminalGroupId(id);
+    }
+//xzzzzzzzzzzzzzzzzzz
+    public void setCriminals(CriminalRepository cr, Long id) {
+        this.criminals = cr.findCriminalByCriminalGroupId(id);
     }
 }
