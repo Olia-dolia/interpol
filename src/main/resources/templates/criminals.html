@@ -8,6 +8,59 @@
 </head>
 <body>
 <div class="container-lg">
+    <!--/*@thymesVar id="status" type="com.example.interpol.entities.Status"*/-->
+    <!--/*@thymesVar id="professions" type="com.example.interpol.entities.Profession"*/-->
+    <!--/*@thymesVar id="languages" type="com.example.interpol.entities.Language"*/-->
+    <h2 class="text-center">Internationally Wanted Criminals</h2>
+    <br>
+    <form method="post" action="add_criminal">
+        <label class="form-label" for="first_name">First Name:</label>
+        <input class="form-control" id="first_name" type="text" required>
+        <label class="form-label" for="last_name">Last Name:</label>
+        <input class="form-control" id="last_name" type="text" required>
+        <label class="form-label" for="alias">Alias:</label>
+        <input class="form-control" id="alias" type="text" required>
+        <label class="form-label" for="date_birth">Date of birth:</label>
+        <input class="form-control" id="date_birth" type="date">
+        <label class="form-label" for="place_birth">Place of birth:</label>
+        <input class="form-control" id="place_birth" type="text">
+        <label class="form-label" for="nationality">Nationality:</label>
+        <input class="form-control" id="nationality" type="text" required>
+        <label class="form-check-label form-check-inline" for="languages">Languages:</label><!--checkboooooooox-->
+        <!--<input class="form-control" id="languages" type="text">-->
+        <input class="form-check-input form-check-inline" id="languages" type="checkbox"
+                   th:each="l:${languages}"
+                   th:text="${l.getLanguage()}"
+                   th:value="${l.getId()}"
+                   th:field="*{languages}"><br>
+        <label class="form-label" for="eyes_color">Eyes color:</label>
+        <input class="form-control" id="eyes_color" type="text">
+        <label class="form-label" for="hair_color">Hair color:</label>
+        <input class="form-control" id="hair_color" type="text">
+        <label class="form-label" for="height">Height:</label>
+        <input class="form-control" id="height" type="number">
+        <label class="form-label" for="last_place_residence">Last place of residence:</label>
+        <input class="form-control" id="last_place_residence" type="text">
+        <label class="form-label" for="special_signs">Special signs:</label>
+        <input class="form-control" id="special_signs" type="text">
+        <label class="form-label" for="criminal_group">Criminal group:</label>
+        <input class="form-control" id="criminal_group" type="text" placeholder="Empty = Single player"><!--spinneeeeeeeeeeeeeeeer?????????-->
+        <label class="form-label" for="last_case">Last case:</label>
+        <input class="form-control" id="last_case" type="text">
+        <label class="form-label" for="profession">Profession:</label><!--spinnneeeeeeeeeeeeeeeer-->
+        <select id="profession" class="form-select" name="profession" aria-label="Profession" th:field="*{professions}" required>
+            <option th:each="p : ${professions}" th:value="${p.getTitle()}" th:text="${p.getTitle()}">
+            </option>
+        </select>
+        <label class="form-label" for="status">Status:</label>
+        <select id="status" class="form-select" name="status" aria-label="Status" th:field="*{status}" required>
+            <option th:each="s : ${status}" th:value="${s.getStatus()}" th:text="${s.getStatus()}">
+            </option>
+        </select>
+
+        <button type="submit" class="btn btn-primary custom">Add</button>
+    </form>
+    <br>
 <table class="table table-sm table-striped table-hover table-bordered align-middle">
     <thead class="table">
     <tr  class="text-center">
@@ -15,7 +68,7 @@
         <td class="td-header">Full Name</td>
         <td class="td-header">Alias</td>
         <td class="td-header">Status</td>
-        <td class="td-header">Details</td>
+        <td class="td-header">Info</td>
         <td class="td-header">Edit</td>
         <td class="td-header">Delete</td>
     </tr>
@@ -28,7 +81,7 @@
         <td th:text="${c.alias}"></td>
         <td th:text="${c.status.getStatus()}"></td>
         <td class="text-center">
-            <a th:href="@{/show_details/{id}(id=${c.id})}" class="btn btn-sm btn-outline-primary">Show</a>
+            <a th:href="@{/criminal_info/{id}(id=${c.id})}" class="btn btn-sm btn-outline-primary">Show</a>
         </td>
         <td class="text-center">
             <a th:href="@{/edit_criminal(id=${c.id})}" class="btn btn-sm btn-outline-info">Edit</a>
@@ -38,6 +91,7 @@
             <span th:if="${c.status.getStatus() == 'Dead'}"><a class="btn bt-sm btn-outline-danger" data-bs-toggle="modal"
                                                                data-bs-target="#myconfirm"
                th:attr="data-bs-link=@{/delete_criminal(id=${c.id})}, data-bs-text=${c.alias}, data-bs-id=${c.id}">Delete</a></span>
+            <span th:if="${c.status.getStatus() != 'Dead'}">Forbidden</span>
         </td>
     </tr>
     </tbody>

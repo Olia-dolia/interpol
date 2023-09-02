@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -70,7 +69,10 @@ public class Criminal {
     @JoinColumn(name = "last_case_id")
     private LastCase lastCase;
 
-    @OneToMany(mappedBy = "criminal", orphanRemoval = true)
+    @ManyToMany
+    @JoinTable(name = "criminal_languages",
+            joinColumns = @JoinColumn(name = "criminal_id"),
+            inverseJoinColumns = @JoinColumn(name = "languages_id"))
     private List<Language> languages = new ArrayList<>();
 
     public Criminal(String firstName, String lastName, String alias, Double height,
@@ -111,5 +113,12 @@ public class Criminal {
         this.placeOfBirth = placeOfBirth;
         this.dateOfBirth = dateOfBirth;
         this.lastPlaceOfResidence = lastPlaceOfResidence;
+    }
+    public String printLanguages(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Language l:languages) {
+            stringBuilder.append(l.getLanguage()).append(" ");
+        }
+        return stringBuilder.toString();
     }
 }

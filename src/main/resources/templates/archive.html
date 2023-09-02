@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="container-lg">
+    <h2 class="text-center">Archive</h2>
     <table class="table table-sm table-striped table-hover table-bordered align-middle">
         <thead class="table">
         <tr  class="text-center">
@@ -15,7 +16,7 @@
             <td class="td-header">Full Name</td>
             <td class="td-header">Alias</td>
             <td class="td-header">Status</td>
-            <td class="td-header">Details</td>
+            <td class="td-header">Info</td>
             <td class="td-header">Edit</td>
             <td class="td-header">Delete</td>
         </tr>
@@ -28,7 +29,7 @@
             <td th:text="${c.alias}"></td>
             <td th:text="${c.status.getStatus()}"></td>
             <td class="text-center">
-                <a th:href="@{/show_details/{id}(id=${c.id})}" class="btn btn-sm btn-outline-primary">Show</a>
+                <a th:href="@{/criminal_info/{id}(id=${c.id})}" class="btn btn-sm btn-outline-primary">Show</a>
             </td>
             <td class="text-center">
                 <a th:href="@{/edit_criminal(id=${c.id})}" class="btn btn-sm btn-outline-info">Edit</a>
@@ -38,6 +39,7 @@
                 <span th:if="${c.status.getStatus() == 'Dead'}"><a class="btn bt-sm btn-outline-danger" data-bs-toggle="modal"
                                                                    data-bs-target="#myconfirm"
                                                                    th:attr="data-bs-link=@{/delete_criminal(id=${c.id})}, data-bs-text=${c.alias}, data-bs-id=${c.id}">Delete</a></span>
+                <span th:if="${c.status.getStatus() != 'Dead'}">Forbidden</span>
             </td>
         </tr>
         </tbody>

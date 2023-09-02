@@ -2,7 +2,6 @@ package com.example.interpol;
 
 import com.example.interpol.entities.*;
 import com.example.interpol.repositories.*;
-import org.hibernate.mapping.Set;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,10 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Locale;
+import java.util.*;
 
 @SpringBootApplication
 public class InterpolApplication {
@@ -36,8 +32,18 @@ public class InterpolApplication {
             //repository.findAll().forEach(System.out::println);
 
           /*  repository.findByFirstNameStartsWith("Ja").forEach(System.out::println);*/
+           /* updateLang(lr, cr);*/
         };
     }
+
+//    private void updateLang(LanguageRepository languageRepository, CriminalRepository criminalRepository){
+//        Criminal c = criminalRepository.getById(1L);
+//        Set<Language> languageSet = new HashSet<Language>();
+//        languageSet.add(languageRepository.getById(2L));
+//        languageSet.add(languageRepository.getById(6L));
+//        c.setLanguages(languageSet);
+//        criminalRepository.save(c);
+//    }
 
     private void fillLanguages(LanguageRepository languageRepository){
         languageRepository.save(new Language("UK"));

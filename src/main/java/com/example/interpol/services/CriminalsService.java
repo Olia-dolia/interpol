@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,5 +23,9 @@ public class CriminalsService {
 
     public Integer getParticipantsByCriminalGroupId(Long id){
         return criminalRepository.findCriminalByCriminalGroupId(id).size();
+    }
+
+    public Optional<Criminal> getCriminalById(Long id) {
+        return criminalRepository.findById(id);
     }
 }

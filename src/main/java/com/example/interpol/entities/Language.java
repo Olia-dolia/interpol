@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -20,16 +23,8 @@ public class Language {
     @Column(name = "language", unique = true, nullable = false)
     private String language;
 
-    @ManyToOne
-    @JoinColumn(name = "criminal_id")
-    private Criminal criminal;
-
     public Language(String language) {
         this.language = language;
     }
 
-    public Language(String language, Criminal criminal) {
-        this.language = language;
-        this.criminal = criminal;
-    }
 }

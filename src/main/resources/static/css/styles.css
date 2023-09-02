@@ -3,10 +3,33 @@ td.td-header{
     font-size: large;
     font-weight: bold;
 }
-/*thead > tr > td{
-    background: lightslategrey;
-    font-size: large;
-}*/
+
 body{
     background-color: #faf8ff;
+}
+
+.btn.custom{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 60px;
+    padding-right: 60px;
+    float: right;
+}
+
+.form-label{
+    font-size: medium;
+    font-weight: bolder;
+}
+
+.form-check-inline {
+    display: inline-block;
+    margin-right: 0.3rem;
+    margin-left: 0.5rem;
+}
+
+.form-check-label{
+    font-size: medium;
+    font-weight: bolder;
+    margin-left: 0;
+    margin-bottom: 5px;
 }

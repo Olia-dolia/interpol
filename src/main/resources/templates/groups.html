@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="container-lg">
+    <h2 class="text-center">Criminal Groups</h2>
     <table class="table table-sm table-striped table-hover table-bordered align-middle">
         <thead class="table">
         <tr  class="text-center">
@@ -15,7 +16,7 @@
             <td class="td-header">Group Name</td>
             <td class="td-header">Number Of Participants</td>
             <td class="td-header">Criminal Type</td>
-            <td class="td-header">Details</td>
+            <td class="td-header">Info</td>
             <td class="td-header">Edit</td>
      <!--       <td class="td-header">Delete</td>-->
         </tr>
@@ -28,10 +29,10 @@
             <td th:text="${g.numberOfParticipants}"></td>
             <td th:text="${g.criminalType.nameType}"></td>
             <td class="text-center">
-                <a th:href="@{/show_details/{id}(id=${g.id})}" class="btn btn-sm btn-outline-primary">Show</a>
+                <a th:href="@{/groups_info/{id}(id=${g.id})}" class="btn btn-sm btn-outline-primary">Show</a>
             </td>
             <td class="text-center">
-                <a th:href="@{/edit_criminal(id=${g.id})}" class="btn btn-sm btn-outline-info">Edit</a>
+                <a th:href="@{/edit_group(id=${g.id})}" class="btn btn-sm btn-outline-info">Edit</a>
             </td>
         </tr>
         </tbody>
