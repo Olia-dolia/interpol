@@ -5,7 +5,9 @@ import com.example.interpol.entities.CriminalGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
 import java.util.Set;
 
 public interface CriminalGroupRepository extends JpaRepository<CriminalGroup, Long> {
+    Optional<CriminalGroup> findByName(String name);
 }

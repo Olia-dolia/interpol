@@ -1,18 +1,16 @@
 package com.example.interpol.services;
 
-import com.example.interpol.entities.CriminalGroup;
 import com.example.interpol.repositories.CriminalGroupRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @AllArgsConstructor
 @Service
-public class GroupService {
+public class CriminalGroupService {
+
     private final CriminalGroupRepository criminalGroupRepository;
 
-    public List<CriminalGroup> findAll(){
+    /*public Integer getNumberOfParticipantsByGroupName(){
         return criminalGroupRepository.findAll();
-    }
+    }*/
 }

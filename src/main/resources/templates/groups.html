@@ -14,7 +14,7 @@
         <tr  class="text-center">
             <td class="td-header">#</td>
             <td class="td-header">Group Name</td>
-            <td class="td-header">Number Of Participants</td>
+ <!--           <td class="td-header">Number Of Participants</td>-->
             <td class="td-header">Criminal Type</td>
             <td class="td-header">Info</td>
             <td class="td-header">Edit</td>
@@ -22,12 +22,12 @@
         </tr>
         </thead>
         <tbody>
-        <!--/*@thymesVar id="criminals" type="com.example.interpol.entities.CriminalGroup"*/-->
-        <tr th:each="g:${groups}">
+        <!--/*@thymesVar id="groups" type="com.example.interpol.entities.CriminalGroup"*/-->
+        <tr th:each="g: ${groups}">
             <td class="text-center" th:text="${g.id}"></td>
             <td th:text="${g.name}"></td>
-            <td th:text="${g.numberOfParticipants}"></td>
             <td th:text="${g.criminalType.nameType}"></td>
+            <!--<td th:text="${g.criminalType.nameType}"></td>-->
             <td class="text-center">
                 <a th:href="@{/groups_info/{id}(id=${g.id})}" class="btn btn-sm btn-outline-primary">Show</a>
             </td>

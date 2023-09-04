@@ -25,9 +25,6 @@ public class CriminalGroup {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "number_of_participants", columnDefinition = "integer default 0")
-    private Integer numberOfParticipants;
-
     @ManyToOne
     @JoinColumn(name = "criminal_type_id")
     private CriminalType criminalType;
@@ -35,29 +32,18 @@ public class CriminalGroup {
     @OneToMany(mappedBy = "criminalGroup", orphanRemoval = true)
     private Set<Criminal> criminals = new LinkedHashSet<>();
 
-    public CriminalGroup(String name, CriminalType criminalType, Set<Criminal> criminals, CriminalRepository cr) {
+    public CriminalGroup(String name, CriminalType criminalType, Set<Criminal> criminals) {
         this.name = name;
-        this.numberOfParticipants = getCriminals().size();
         this.criminalType = criminalType;
         this.criminals = getCriminals();
     }
 
-    public CriminalGroup(String name) {
-        this.name = name;
-        this.numberOfParticipants = getCriminals().size();
-    }
-
     public CriminalGroup(String name, CriminalType criminalType) {
         this.name = name;
-        this.numberOfParticipants = getNumberOfParticipants();
         this.criminalType = criminalType;;
     }
 
-    public void setNumberOfParticipants(CriminalsService cs, Long id) {
-        this.numberOfParticipants = cs.getParticipantsByCriminalGroupId(id);
-    }
-//xzzzzzzzzzzzzzzzzzz
-    public void setCriminals(CriminalRepository cr, Long id) {
-        this.criminals = cr.findCriminalByCriminalGroupId(id);
+    public CriminalGroup(String name) {
+        this.name = name;
     }
 }

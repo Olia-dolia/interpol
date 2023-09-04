@@ -10,7 +10,7 @@
 <div class="container-lg">
     <!--/*@thymesVar id="criminal" type="com.example.interpol.entities.Criminal"*/-->
     <h2 th:text="Criminal + ' &#35' + ${criminal.id} + ' ' + ${criminal.firstName} + ' &quot' + ${criminal.alias} + '&quot '
-    + ${criminal.lastName}" class="text-center"></h2><!--change set here full name and alias-->
+    + ${criminal.lastName}" class="text-center"></h2>
     <table class="table table-sm table-striped table-hover table-bordered align-middle">
         <thead class="table">
         <tr  class="text-center">
@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         <tr>
-            <td th:text="${criminal.placeOfBirth} + ', ' + ${criminal.dateOfBirth}"></td>
+            <td th:text="${criminal.placeOfBirth} + ' ' + ${criminal.dateOfBirth}"></td>
             <td th:text="${criminal.nationality}"></td>
             <td th:text="${criminal.printLanguages()}"></td>
             <td th:text="${criminal.height}"></td>

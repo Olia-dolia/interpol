@@ -1,9 +1,12 @@
 package com.example.interpol.entities;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ public class Criminal {
     @Column(name = "alias", nullable = false)
     private String alias;
 
+    @Nullable
     @Column(name = "height")
     private Double height;
 
@@ -47,6 +51,7 @@ public class Criminal {
     @Column(name = "place_of_birth")
     private String placeOfBirth;
 
+    @Nullable
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
@@ -57,18 +62,22 @@ public class Criminal {
     @JoinColumn(name = "status_id")
     private Status status;
 
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "profession_id")
     private Profession profession;
 
+    @Nullable
     @ManyToOne
     @JoinColumn(name = "criminal_group_id")
     private CriminalGroup criminalGroup;
 
+    @Nullable
     @ManyToOne
     @JoinColumn(name = "last_case_id")
     private LastCase lastCase;
 
+    @Nullable
     @ManyToMany
     @JoinTable(name = "criminal_languages",
             joinColumns = @JoinColumn(name = "criminal_id"),
@@ -114,9 +123,34 @@ public class Criminal {
         this.dateOfBirth = dateOfBirth;
         this.lastPlaceOfResidence = lastPlaceOfResidence;
     }
-    public String printLanguages(){
+
+    public Criminal(String firstName, String lastName, String alias, Double height, String eyesColor,
+                    String hairColor, String nationality, String specialSigns, String placeBirth, LocalDate date,
+                    String lastPlace, CriminalGroup byName, LastCase lastCaseByCaseName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.alias = alias;
+        this.height = height;
+        this.eyesColor = eyesColor;
+        this.hairColor = hairColor;
+        this.nationality =nationality;
+        this.specialSigns = specialSigns;
+        this.placeOfBirth = placeBirth;
+        this.dateOfBirth = date;
+        this.lastPlaceOfResidence = lastPlace;
+        this.criminalGroup = byName;
+        this.lastCase = lastCaseByCaseName;
+    }
+
+    public Criminal(String firstName, String lastName, String alias) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.alias = alias;
+    }
+
+    public String printLanguages() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Language l:languages) {
+        for (Language l : languages) {
             stringBuilder.append(l.getLanguage()).append(" ");
         }
         return stringBuilder.toString();
