@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Criminal</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/dist/css/bootstrap.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container-lg">
+<!--/*@thymesVar id="statuses" type="com.example.interpol.entities.Status"*/-->
+<!--/*@thymesVar id="professions" type="com.example.interpol.entities.Profession"*/-->
+<!--/*@thymesVar id="groups" type="com.example.interpol.entities.CriminalGroup"*/-->
+<!--/*@thymesVar id="languages" type="com.example.interpol.entities.Language"*/-->
+<!--/*@thymesVar id="criminal" type="com.example.interpol.entities.Criminal"*/-->
+<h2 class="text-center">Add Criminal</h2>
+<br>
+<form method="post" action="add_criminal" th:object="${criminal}">
+  <label class="form-label" for="first_name">First Name:</label>
+  <input class="form-control" th:filed="*{firstName}" id="first_name" name="first_name" type="text" required>
+  <label class="form-label" for="last_name">Last Name:</label>
+  <input class="form-control" th:filed="*{lastName}" id="last_name" name="last_name" type="text" required>
+  <label class="form-label" for="alias">Alias:</label>
+  <input class="form-control" th:filed="*{alias}" id="alias" name="alias" type="text" required>
+  <label class="form-label" for="date_birth">Date of birth:</label>
+  <input class="form-control" th:filed="*{dateOfBirth}" id="date_birth" name="date_birth" type="date">
+  <label class="form-label" for="place_birth">Place of birth:</label>
+  <input class="form-control" th:filed="*{placeOfBirth}" id="place_birth" name="place_birth" type="text">
+  <label class="form-label" for="nationality">Nationality:</label>
+  <input class="form-control" th:filed="*{nationality}" id="nationality" name="nationality" type="text">
+  <label class="form-check-label form-check-inline" >Languages:
+    <input class="form-check-input form-check-inline" type="checkbox" name="languages"
+           th:each="language : ${languages}"
+           th:text="${language.language}"
+           th:value="${language.id}"
+           th:field="*{languages}"/>
+  </label>
+  <br>
+  <label class="form-label" for="eyes_color">Eyes color:</label>
+  <input class="form-control" th:filed="*{eyesColor}" id="eyes_color" name="eyes" type="text">
+  <label class="form-label" th:filed="*{hairColor}" for="hair_color">Hair color:</label>
+  <input class="form-control" name="hair" id="hair_color" type="text">
+  <label class="form-label" th:filed="*{height}" for="height">Height:</label>
+  <input class="form-control" id="height" name="height" type="number">
+  <label class="form-label" for="last_place_residence">Last place of residence:</label>
+  <input class="form-control" th:filed="*{lastPlaceOfResidence}" id="last_place_residence"  name="last_place" type="text">
+  <label class="form-label" for="special_signs">Special signs:</label>
+  <input class="form-control" th:filed="*{specialSigns}" id="special_signs" name="special_signs" type="text">
+  <label class="form-label" for="criminal_group">Criminal group:</label>
+  <select id="criminal_group" class="form-select" name="criminal_group" aria-label="criminal_group"
+          th:field="*{criminalGroup}" type="number" >
+    <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}">
+    </option>
+  </select>
+  <label class="form-label" for="last_case">Last case:</label>
+  <input class="form-control" th:filed="*{lastCase}" id="last_case" type="text" name="last_case">
+  <label class="form-label"  for="profession">Profession:</label>
+  <select id="profession" class="form-select" th:field="*{profession}" name="profession" aria-label="Profession" type="number" >
+    <option th:each="p : ${professions}" th:value="${p.getId()}" th:text="${p.getTitle()}"></option>
+  </select>
+  <label class="form-label" for="status">Status:</label>
+  <select id="status" class="form-select" name="status" aria-label="Status" th:field="*{status}" type="number" >
+    <option th:each="s : ${statuses}" th:value="${s.getId()}" th:text="${s.getStatus()}">
+    </option>
+  </select>
+  <a href="/criminals" class="btn btn-primary custom" style="float: left" role="button">Back</a>
+  <button type="submit" class="btn btn-primary custom">Add</button>
+</form>
+  </div>
+</body>
+</html>

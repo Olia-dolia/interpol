@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Archive</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/dist/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container-lg">
+    <h2 class="text-center">Archive</h2>
+    <table class="table table-sm table-striped table-hover table-bordered align-middle">
+        <thead class="table">
+        <tr  class="text-center">
+            <td class="td-header">#</td>
+            <td class="td-header">Full Name</td>
+            <td class="td-header">Alias</td>
+            <td class="td-header">Status</td>
+            <td class="td-header">Info</td>
+            <td class="td-header">Edit</td>
+            <td class="td-header">Delete</td>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="criminals" type="com.example.interpol.entities.Criminal"*/-->
+        <tr th:each="c:${criminals}">
+            <td class="text-center" th:text="${c.id}"></td>
+            <td th:text="${c.firstName} + ' ' + ${c.lastName}"></td>
+            <td th:text="${c.alias}"></td>
+            <td th:text="${c.status.getStatus()}"></td>
+            <td class="text-center">
+                <a th:href="@{/criminal_info/{id}(id=${c.id})}" class="btn btn-sm btn-outline-primary">Show</a>
+            </td>
+            <td class="text-center">
+                <a th:href="@{/edit_criminal(id=${c.id})}" class="btn btn-sm btn-outline-info">Edit</a>
+            </td>
+            <td class="text-center">
+                <!-- <a th:href="@{/delete_criminal(id=${c.id})}" class="btn btn-sm btn-outline-danger">Delete</a>-->
+                <span th:if="${c.status.getStatus() == 'Dead'}"><a class="btn bt-sm btn-outline-danger" data-bs-toggle="modal"
+                                                                   data-bs-target="#myconfirm"
+                                                                   th:attr="data-bs-link=@{/delete_criminal(id=${c.id})}, data-bs-text=${c.alias}, data-bs-id=${c.id}">Delete</a></span>
+                <span th:if="${c.status.getStatus() != 'Dead'}">Forbidden</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="myconfirm" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="staticWarningLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticWarningLabel">Warning</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete criminal?<br/>
+                If you click delete, this action <i>cannot be undone</i>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <a class="btn btn-danger delete-button">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let myConfirmModal = document.getElementById('myconfirm');
+    myConfirmModal.addEventListener('show.bs.modal', function (event) {
+        let button = event.relatedTarget;
+        let link = button.getAttribute('data-bs-link');
+        let tid = button.getAttribute('data-bs-id');
+        let text = button.getAttribute('data-bs-text');
+        let modalTitle = myConfirmModal.querySelector('.modal-title');
+        modalTitle.textContent = 'Deleting criminal: ' + text + ' (' + tid + ')'
+        let deleteButton = myConfirmModal.querySelector('.delete-button');
+        deleteButton.setAttribute("href", link)
+    })
+</script>
+<script th:src="@{webjars/jquery/3.7.0/dist/jquery.js}"></script>
+<script th:src="@{webjars/popperjs__core/2.11.8/dist/umd/popper.js}"></script>
+<script th:src="@{webjars/bootstrap/5.3.0/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

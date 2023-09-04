@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Criminal Groups</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/dist/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container-lg">
+    <h2 class="text-center">Criminal Groups</h2>
+    <table class="table table-sm table-striped table-hover table-bordered align-middle">
+        <thead class="table">
+        <tr  class="text-center">
+            <td class="td-header">#</td>
+            <td class="td-header">Group Name</td>
+ <!--           <td class="td-header">Number Of Participants</td>-->
+            <td class="td-header">Criminal Type</td>
+            <td class="td-header">Info</td>
+            <td class="td-header">Edit</td>
+     <!--       <td class="td-header">Delete</td>-->
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="groups" type="com.example.interpol.entities.CriminalGroup"*/-->
+        <tr th:each="g: ${groups}">
+            <td class="text-center" th:text="${g.id}"></td>
+            <td th:text="${g.name}"></td>
+            <td th:text="${g.criminalType.nameType}"></td>
+            <!--<td th:text="${g.criminalType.nameType}"></td>-->
+            <td class="text-center">
+                <a th:href="@{/groups_info/{id}(id=${g.id})}" class="btn btn-sm btn-outline-primary">Show</a>
+            </td>
+            <td class="text-center">
+                <a th:href="@{/edit_group(id=${g.id})}" class="btn btn-sm btn-outline-info">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
