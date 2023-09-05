@@ -27,8 +27,8 @@ public class CriminalsService {
         return criminalRepository.findCriminalsByStatusStatus("Out of game");
     }
 
-    public Integer getParticipantsByCriminalGroupId(Long id) {
-        return criminalRepository.findCriminalByCriminalGroupId(id).size();
+    public Set<Criminal> getParticipantsByCriminalGroupId(Long id) {
+        return criminalRepository.findCriminalByCriminalGroupId(id);
     }
 
     public Optional<Criminal> getCriminalById(Long id) {

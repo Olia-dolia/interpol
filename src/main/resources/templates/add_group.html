@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Add Criminal Group</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/dist/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container-lg">
+<h2 class="text-center">Add Criminal Group</h2>
+<br>
+<!--/*@thymesVar id="group" type="com.example.interpol.entities.CriminalGroup"*/-->
+<!--/*@thymesVar id="types" type="com.example.interpol.entities.CriminalType"*/-->
+<form method="post" action="add_group" th:object="${group}">
+    <label class="form-label" for="name">Criminal Group Name:</label>
+    <input class="form-control" th:filed="*{name}" id="name" name="name" type="text" required>
+    <label class="form-label"  for="type">Criminal Type:</label>
+    <select id="type" class="form-select" th:field="*{criminalType}" name="type" aria-label="Type" type="number" >
+        <option th:each="t : ${types}" th:value="${t.id}" th:text="${t.nameType}"></option>
+    </select>
+    <a href="/groups" class="btn btn-primary custom" style="float: left" role="button">Back</a>
+    <button type="submit" class="btn btn-primary custom">Add</button>
+</form>
+</div>
+</body>
+</html>

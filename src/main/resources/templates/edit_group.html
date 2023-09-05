@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Group</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/dist/css/bootstrap.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-lg">
+  <!--/*@thymesVar id="group" type="com.example.interpol.entities.CriminalGroup"*/-->
+  <!--/*@thymesVar id="types" type="com.example.interpol.entities.CriminalType"*/-->
+  <h2 th:text="Edit + ' ' + Criminal + ' ' + Group + ' &#35' + ${group.id}" class="text-center"></h2>
+  <br>
+  <form method="post" action="edit_group" th:object="${group}">
+    <label class="form-label" for="name">Criminal Group Name:</label>
+    <input class="form-control" th:value="${group.name}" th:filed="*{name}" id="name" name="name" type="text" required>
+    <label class="form-label"  for="type">Criminal Type:</label>
+    <select id="type" class="form-select" th:field="*{criminalType}" name="type" aria-label="Type" type="number" >
+      <option th:each="t : ${types}" th:value="${t.id}" th:text="${t.nameType}"></option>
+    </select>
+    <input type="hidden" name="group_id" th:value="${group.id}">
+    <a href="/groups" class="btn btn-primary custom" style="float: left" role="button">Back</a>
+    <button type="submit" class="btn btn-primary custom">Update</button>
+  </form>
+</div>
+</body>
+</html>

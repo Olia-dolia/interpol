@@ -104,7 +104,6 @@ public class CriminalsController {
                                  @RequestParam Long criminalGroup, @RequestParam("special_signs") String specialSigns,
                                  @RequestParam("last_case") String lastCase, @RequestParam Long profession,
                                  @RequestParam Long status) {
-        System.out.println(criminalGroup);
         criminalsService.updateCriminal(id,firstName, lastName, alias, dateBirth, placeBirth, nationality, languages, eyesColor,
                 hairColor, height, lastPlace, criminalGroup,
                 specialSigns, lastCase, profession, status);
