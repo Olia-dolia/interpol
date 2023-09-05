@@ -13,6 +13,8 @@
     <!--/*@thymesVar id="languages" type="com.example.interpol.entities.Language"*/-->
     <h2 class="text-center">Internationally Wanted Criminals</h2>
     <br>
+    <a href="groups" class="btn btn-primary" role="button">GROUPS</a>
+    <a href="archive" class="btn btn-primary" role="button">ARCHIVE</a>
     <a href="/criminals/add_criminal" class="btn btn-primary custom" role="button">ADD</a>
     <br>
 <table class="table table-sm table-striped table-hover table-bordered align-middle">
@@ -41,7 +43,6 @@
             <a th:href="@{/criminals/edit_criminal(id=${c.id})}" class="btn btn-sm btn-outline-info">Edit</a>
         </td>
         <td class="text-center">
-           <!-- <a th:href="@{/delete_criminal(id=${c.id})}" class="btn btn-sm btn-outline-danger">Delete</a>-->
             <span th:if="${c.status.getStatus() == 'Dead'}"><a class="btn bt-sm btn-outline-danger" data-bs-toggle="modal"
                                                                data-bs-target="#myconfirm"
                th:attr="data-bs-link=@{/criminals/delete_criminal(id=${c.id})}, data-bs-text=${c.alias}, data-bs-id=${c.id}">Delete</a></span>

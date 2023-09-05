@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     private final CriminalsService criminalsService;
-    private final GroupService groupService;
 
     @GetMapping("main")
     public String main() {
@@ -24,9 +23,4 @@ public class MainController {
         return "archive";
     }
 
-    @GetMapping("groups")
-    public String groups(Model model){
-        model.addAttribute("groups", groupService.findAll());
-        return "groups";
-    }
 }

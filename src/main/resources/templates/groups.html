@@ -9,34 +9,83 @@
 <body>
 <div class="container-lg">
     <h2 class="text-center">Criminal Groups</h2>
+    <br>
+    <a href="criminals" class="btn btn-primary" role="button">CRIMINALS</a>
+    <a href="archive" class="btn btn-primary" role="button">ARCHIVE</a>
+    <a href="/groups/add_group" class="btn btn-primary custom" role="button">ADD</a>
+    <br>
     <table class="table table-sm table-striped table-hover table-bordered align-middle">
         <thead class="table">
         <tr  class="text-center">
             <td class="td-header">#</td>
             <td class="td-header">Group Name</td>
- <!--           <td class="td-header">Number Of Participants</td>-->
+            <td class="td-header">Number Of Participants</td>
             <td class="td-header">Criminal Type</td>
             <td class="td-header">Info</td>
             <td class="td-header">Edit</td>
-     <!--       <td class="td-header">Delete</td>-->
+            <td class="td-header">Delete</td>
         </tr>
         </thead>
         <tbody>
         <!--/*@thymesVar id="groups" type="com.example.interpol.entities.CriminalGroup"*/-->
-        <tr th:each="g: ${groups}">
-            <td class="text-center" th:text="${g.id}"></td>
-            <td th:text="${g.name}"></td>
-            <td th:text="${g.criminalType.nameType}"></td>
-            <!--<td th:text="${g.criminalType.nameType}"></td>-->
+        <tr th:each="group: ${groups}">
+            <td class="text-center" th:text="${group.id}"></td>
+            <td th:text="${group.name}"></td>
+            <td th:text="${group.criminals.size()}"></td>
+            <td th:text="${group.criminalType.nameType}"></td>
             <td class="text-center">
-                <a th:href="@{/groups_info/{id}(id=${g.id})}" class="btn btn-sm btn-outline-primary">Show</a>
+                <a th:href="@{/groups/group_info/{id}(id=${group.id})}" class="btn btn-sm btn-outline-primary">Show</a>
             </td>
             <td class="text-center">
-                <a th:href="@{/edit_group(id=${g.id})}" class="btn btn-sm btn-outline-info">Edit</a>
+                <a th:href="@{/groups/edit_group(id=${group.id})}" class="btn btn-sm btn-outline-info">Edit</a>
+            </td>
+            <td class="text-center">
+                <span th:if="${group.criminals.size() == 0}"><a class="btn bt-sm btn-outline-danger" data-bs-toggle="modal"
+                                                                   data-bs-target="#myconfirm"
+                                                                   th:attr="data-bs-link=@{/groups/delete_group(id=${group.id})}, data-bs-text=${group.name}, data-bs-id=${group.id}">Delete</a></span>
+                <span th:if="${group.criminals.size() != 0}">Forbidden</span>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+</div>
+<div class="modal fade" id="myconfirm" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="staticWarningLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticWarningLabel">Warning</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete criminal?<br/>
+                If you click delete, this action <i>cannot be undone</i>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <a class="btn btn-danger delete-button">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let myConfirmModal = document.getElementById('myconfirm');
+    myConfirmModal.addEventListener('show.bs.modal', function (event) {
+        let button = event.relatedTarget;
+        let link = button.getAttribute('data-bs-link');
+        let tid = button.getAttribute('data-bs-id');
+        let text = button.getAttribute('data-bs-text');
+        let modalTitle = myConfirmModal.querySelector('.modal-title');
+        modalTitle.textContent = 'Deleting criminal: ' + text + ' (' + tid + ')'
+        let deleteButton = myConfirmModal.querySelector('.delete-button');
+        deleteButton.setAttribute("href", link)
+    })
+</script>
+<script th:src="@{webjars/jquery/3.7.0/dist/jquery.js}"></script>
+<script th:src="@{webjars/popperjs__core/2.11.8/dist/umd/popper.js}"></script>
+<script th:src="@{webjars/bootstrap/5.3.0/dist/js/bootstrap.bundle.js}"></script>
 </body>
 </html>
