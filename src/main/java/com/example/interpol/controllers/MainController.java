@@ -19,7 +19,7 @@ public class MainController {
 
     @GetMapping("archive")
     public String archive(Model model) {
-        model.addAttribute("criminals", criminalsService.getOutOfGameCriminals());
+        model.addAttribute("criminals", criminalsService.getCriminalsByStatusId(3L));
         return "archive";
     }
 

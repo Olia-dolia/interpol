@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Set;
 
 public interface CriminalRepository extends JpaRepository<Criminal, Long> {
-    List<Criminal> findCriminalsByStatusStatus(String status);
+    List<Criminal> findCriminalsByStatusId(Long statusId);
     Set<Criminal> findCriminalByCriminalGroupId(Long id);
     @Query("select c from Criminal c where lower(c.firstName) like ?1 OR lower(c.lastName) like ?1 OR lower(c.alias) like ?1")
     List<Criminal> findAllByFirstNameOrLastNameOrAliasLike(String name);
+
+    List<Criminal> findCriminalByProfessionId(Long id);
 }

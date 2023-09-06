@@ -23,8 +23,8 @@ public class CriminalsService {
         return criminalRepository.findAll();
     }
 
-    public List<Criminal> getOutOfGameCriminals() {
-        return criminalRepository.findCriminalsByStatusStatus("Out of game");
+    public List<Criminal> getCriminalsByStatusId(Long id) {
+        return criminalRepository.findCriminalsByStatusId(id);
     }
 
     public Set<Criminal> getParticipantsByCriminalGroupId(Long id) {
@@ -109,5 +109,9 @@ public class CriminalsService {
 
     public List<Criminal> getCriminalsByNameOrAlias(String name) {
         return criminalRepository.findAllByFirstNameOrLastNameOrAliasLike(name);
+    }
+
+    public List<Criminal> getCriminalsByProfessionId(long professionId) {
+        return criminalRepository.findCriminalByProfessionId(professionId);
     }
 }
