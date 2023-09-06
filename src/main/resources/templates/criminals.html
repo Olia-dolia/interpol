@@ -8,15 +8,38 @@
 </head>
 <body>
 <div class="container-lg">
+    <br>
     <!--/*@thymesVar id="status" type="com.example.interpol.entities.Status"*/-->
     <!--/*@thymesVar id="professions" type="com.example.interpol.entities.Profession"*/-->
     <!--/*@thymesVar id="languages" type="com.example.interpol.entities.Language"*/-->
     <h2 class="text-center">Internationally Wanted Criminals</h2>
     <br>
-    <a href="groups" class="btn btn-primary" role="button">GROUPS</a>
-    <a href="archive" class="btn btn-primary" role="button">ARCHIVE</a>
+    <a href="/groups" class="btn btn-primary" role="button">GROUPS</a>
+    <a href="/archive" class="btn btn-primary" role="button">ARCHIVE</a>
     <a href="/criminals/add_criminal" class="btn btn-primary custom" role="button">ADD</a>
     <br>
+    <form method="get" action="/criminals/filter" class="form-inline" style="margin-top: 10px">
+        <label for="filtertxt" class="form-label">Find by name or alias</label>
+        <input id="filtertxt" type="text" name="filter_name" class="form-control"
+               placeholder="Enter the part of name/alias more than 3 letter">
+        <button type="submit" class="btn btn-primary custom">SEARCH</button>
+    </form>
+    <form method="get" action="/criminals/filter/status" class="form-inline" style="margin-top: 30px">
+        <label for="filter_status" class="form-label">Find by status</label>
+        <br>
+        <button id="filter_status"  th:name="status" th:value="a"  type="submit" class="btn btn-primary">ACTIVE</button>
+        <button th:name="status" th:value="p" type="submit" class="btn btn-primary">PRISON</button>
+        <button th:name="status" th:value="o" type="submit" class="btn btn-primary">OUT OF GAME</button>
+        <button th:name="status" th:value="d" type="submit" class="btn btn-primary">DEAD</button>
+        <button th:name="status" th:value="all" type="submit" class="btn btn-primary custom">ALL</button>
+    </form>
+    <form method="get" action="/criminals/filter/profession" class="form-inline" style="margin-top: 30px">
+        <label class="form-label"  for="profession">Find by Profession:</label>
+        <select id="profession" class="form-select" th:name="profession" aria-label="Profession" type="number" >
+            <option th:each="p : ${professions}" th:value="${p.id}" th:text="${p.title}"></option>
+        </select>
+        <button type="submit" class="btn btn-primary custom">FILTER</button>
+    </form>
 <table class="table table-sm table-striped table-hover table-bordered align-middle">
     <thead class="table">
     <tr  class="text-center">
@@ -31,6 +54,9 @@
     </thead>
     <tbody>
     <!--/*@thymesVar id="criminals" type="com.example.interpol.entities.Criminal"*/-->
+    <tr th:if="${criminals.empty}">
+        <td colspan="7" class="align-middle"> No Criminals Yet </td>
+    </tr>
     <tr th:each="c:${criminals}">
         <td class="text-center" th:text="${c.id}"></td>
         <td th:text="${c.firstName} + ' ' + ${c.lastName}"></td>
