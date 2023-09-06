@@ -45,15 +45,4 @@ public class FilterController {
         model.addAttribute("criminals", criminalsService.getCriminalsByProfessionId((long) profession));
         return "criminals";
     }
-
-    /*professionRepository.save(new Profession("Leader"));
-        professionRepository.save(new Profession("Right hand"));
-        professionRepository.save(new Profession("Assistant"));
-        professionRepository.save(new Profession("Accountant"));
-        professionRepository.save(new Profession("Driver"));
-        professionRepository.save(new Profession("Drug dealer"));
-        professionRepository.save(new Profession("Arms dealer"));
-        professionRepository.save(new Profession("Thief"));
-        professionRepository.save(new Profession("Guard"));
-        professionRepository.save(new Profession("Gangster"));*/
 }
