@@ -35,6 +35,14 @@ public class CriminalsService {
         return criminalRepository.findById(id);
     }
 
+    /*public List<Criminal> getCriminalsByLanguages(long[] languages) {
+        List<Language> languageList = new ArrayList<>();
+        for (long i : languages) {
+            languageList.add(languageRepository.findById(i).get());
+        }
+        return criminalRepository.findAllByLanguages(languageList);
+    }*/
+
     public void addCriminal(String firstName, String lastName, String alias, String dateBirth, String placeBirth,
                             String nationality, long[] languages, String eyesColor, String hairColor,
                             Double height, String lastPlace, Long criminalGroup, String specialSigns, String lastCase, Long profession,
@@ -51,14 +59,10 @@ public class CriminalsService {
         else {
             date = LocalDate.parse(dateBirth);
         }
-        criminalRepository.save(new Criminal(firstName, lastName, alias, height, eyesColor, hairColor,  specialSigns, nationality,
+        criminalRepository.save(new Criminal(firstName, lastName, alias, height, eyesColor, hairColor, specialSigns, nationality,
                 placeBirth, date, lastPlace, languageList,
                 professionRepository.findById(profession).get(), criminalGroupRepository.findById(criminalGroup).get(),
                 statusRepository.findById(status).get(), lastCaseRepository.findLastCaseByCaseName(lastCase)));
-    }
-
-    public void addCriminal(Criminal criminal) {
-        criminalRepository.save(criminal);
     }
 
     public void deleteCriminal(Long id) {
@@ -90,7 +94,7 @@ public class CriminalsService {
             c.setLanguages(languageList);
             c.setEyesColor(eyesColor);
             c.setHairColor(hairColor);
-            if(height!=null) {
+            if (height != null) {
                 c.setHeight(height);
             } else c.setHeight(criminal.get().getHeight());
             c.setLastPlaceOfResidence(lastPlace);
@@ -101,5 +105,9 @@ public class CriminalsService {
             c.setStatus(statusRepository.findById(status).get());
             criminalRepository.save(c);
         });
+    }
+
+    public List<Criminal> getCriminalsByNameOrAlias(String name) {
+        return criminalRepository.findAllByFirstNameOrLastNameOrAliasLike(name.toUpperCase());
     }
 }
