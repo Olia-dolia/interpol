@@ -11,8 +11,6 @@ import java.util.Set;
 public interface CriminalRepository extends JpaRepository<Criminal, Long> {
     List<Criminal> findCriminalsByStatusStatus(String status);
     Set<Criminal> findCriminalByCriminalGroupId(Long id);
-    @Query("select '*' from Criminal c where c.firstName like ?1 OR c.lastName like ?1 OR c.alias like ?1")
+    @Query("select c from Criminal c where lower(c.firstName) like ?1 OR lower(c.lastName) like ?1 OR lower(c.alias) like ?1")
     List<Criminal> findAllByFirstNameOrLastNameOrAliasLike(String name);
-    /*@Query("select c from Criminal c where c.languages = ?1")
-    List<Criminal> findAllByLanguages(List<Language> languageList);*/
 }

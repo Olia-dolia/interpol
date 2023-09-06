@@ -14,16 +14,20 @@
     <!--/*@thymesVar id="languages" type="com.example.interpol.entities.Language"*/-->
     <h2 class="text-center">Internationally Wanted Criminals</h2>
     <br>
-    <a href="groups" class="btn btn-primary" role="button">GROUPS</a>
-    <a href="archive" class="btn btn-primary" role="button">ARCHIVE</a>
+    <a href="/groups" class="btn btn-primary" role="button">GROUPS</a>
+    <a href="/archive" class="btn btn-primary" role="button">ARCHIVE</a>
     <a href="/criminals/add_criminal" class="btn btn-primary custom" role="button">ADD</a>
     <br>
     <form method="get" action="/criminals/filter" class="form-inline" style="margin-top: 10px">
         <label for="filtertxt" class="form-label">Find by name or alias</label>
-        <input id="filtertxt" type="text" name="name_filter" class="form-control"
+        <input id="filtertxt" type="text" name="filter_name" class="form-control"
                placeholder="Enter the part of name/alias more than 3 letter">
-        <button type="submit" class="btn btn-primary custom">FILTER</button>
+        <button type="submit" class="btn btn-primary custom">SEARCH</button>
     </form>
+   <!-- <form method="get" action="/criminals/filter/status" class="form-inline" style="margin-top: 10px">
+        <label for="filter_status" class="form-label">Find by status</label>
+        <button id="filter_status" th:value="" name="status_" type="submit" class="btn btn-primary custom">FILTER</button>
+    </form>-->
     <br>
 <table class="table table-sm table-striped table-hover table-bordered align-middle">
     <thead class="table">
@@ -39,6 +43,9 @@
     </thead>
     <tbody>
     <!--/*@thymesVar id="criminals" type="com.example.interpol.entities.Criminal"*/-->
+    <tr th:if="${criminals.empty}">
+        <td colspan="7" class="align-middle"> No Criminals Yet </td>
+    </tr>
     <tr th:each="c:${criminals}">
         <td class="text-center" th:text="${c.id}"></td>
         <td th:text="${c.firstName} + ' ' + ${c.lastName}"></td>

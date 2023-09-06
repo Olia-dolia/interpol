@@ -108,6 +108,6 @@ public class CriminalsService {
     }
 
     public List<Criminal> getCriminalsByNameOrAlias(String name) {
-        return criminalRepository.findAllByFirstNameOrLastNameOrAliasLike(name.toUpperCase());
+        return criminalRepository.findAllByFirstNameOrLastNameOrAliasLike(name);
     }
 }
