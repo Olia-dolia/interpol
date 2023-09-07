@@ -25,7 +25,7 @@ public class CriminalsController {
 
     @GetMapping
     public String criminals(Model model) {
-        model.addAttribute("criminals", criminalsService.getCriminals());
+        model.addAttribute("criminals", criminalsService.getCriminalsExceptArchive());
         model.addAttribute("status", statusService.findAll());
         model.addAttribute("professions", professionService.findAll());
         model.addAttribute("languages", languageService.findAll());

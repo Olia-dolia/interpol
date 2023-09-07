@@ -20,7 +20,7 @@ public class FilterController {
         if(!name.isEmpty() && name.length()>=3){
             model.addAttribute("criminals", criminalsService.getCriminalsByNameOrAlias(name.toLowerCase()));
         } else {
-            model.addAttribute("criminals", criminalsService.getCriminals());
+            model.addAttribute("criminals", criminalsService.getCriminalsExceptArchive());
             return "redirect:/criminals";
         }
         return "criminals";

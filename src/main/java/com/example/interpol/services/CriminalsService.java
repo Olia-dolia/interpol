@@ -23,6 +23,10 @@ public class CriminalsService {
         return criminalRepository.findAll();
     }
 
+    public List<Criminal> getCriminalsExceptArchive() {
+        return criminalRepository.findCriminalByStatusIsNot("Out of game");
+    }
+
     public List<Criminal> getCriminalsByStatusId(Long id) {
         return criminalRepository.findCriminalsByStatusId(id);
     }
