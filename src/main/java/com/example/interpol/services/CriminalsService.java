@@ -2,6 +2,7 @@ package com.example.interpol.services;
 
 import com.example.interpol.entities.Criminal;
 import com.example.interpol.entities.Language;
+import com.example.interpol.entities.LastCase;
 import com.example.interpol.repositories.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class CriminalsService {
 
     public void addCriminal(String firstName, String lastName, String alias, String dateBirth, String placeBirth,
                             String nationality, long[] languages, String eyesColor, String hairColor,
-                            Double height, String lastPlace, Long criminalGroup, String specialSigns, String lastCase, Long profession,
+                            Double height, String lastPlace, Long criminalGroup, String specialSigns, Long lastCase, Long profession,
                             Long status) {
         List<Language> languageList = new ArrayList<>();
         if (languages != null) {
@@ -63,10 +64,16 @@ public class CriminalsService {
         else {
             date = LocalDate.parse(dateBirth);
         }
+        LastCase lc = new LastCase();
+        if (lastCase!=0) {
+            lc = lastCaseRepository.findById(lastCase).get();
+        } else {
+            lc = null;
+        }
         criminalRepository.save(new Criminal(firstName, lastName, alias, height, eyesColor, hairColor, specialSigns, nationality,
                 placeBirth, date, lastPlace, languageList,
                 professionRepository.findById(profession).get(), criminalGroupRepository.findById(criminalGroup).get(),
-                statusRepository.findById(status).get(), lastCaseRepository.findLastCaseByCaseName(lastCase)));
+                statusRepository.findById(status).get(), lc));
     }
 
     public void deleteCriminal(Long id) {
@@ -117,5 +124,9 @@ public class CriminalsService {
 
     public List<Criminal> getCriminalsByProfessionId(long professionId) {
         return criminalRepository.findCriminalByProfessionId(professionId);
+    }
+
+    public List<Criminal> getCriminalsByLastCaseId(long lastCaseId) {
+        return criminalRepository.findCriminalByLastCaseId(lastCaseId);
     }
 }

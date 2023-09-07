@@ -42,8 +42,15 @@
         </tr>
         </tbody>
     </table>
-    <br style="margin-bottom: 10px">
-    <a href="/criminals" class="btn btn-primary custom" role="button">BACK</a>
+    <br>
+    <div class="align-content-lg-stretch" style="border: solid 2px crimson; padding: 10px; " th:if="${criminal.lastCase != null}">
+        <h5 th:text="${criminal.lastCase.caseName}"></h5>
+        <p th:text="Participants + ' ' + ${criminal.lastCase.criminals.size()}"></p>
+        <p th:text="${criminal.lastCase.description}"></p>
+    </div>
+    <br>
+    <a th:href="@{/last_cases/last_case/{id}(id=${criminal.lastCase.id})}"  role="button" style="margin: 0;" class="btn btn-sm btn-outline-primary custom">SHOW</a>
+    <a href="/criminals" class="btn btn-primary" style="padding: 4px 60px;" role="button">BACK</a>
 </div>
 </body>
 </html>

@@ -21,4 +21,6 @@ public interface CriminalRepository extends JpaRepository<Criminal, Long> {
     List<Criminal> findAllByFirstNameOrLastNameOrAliasLike(String name);
 
     List<Criminal> findCriminalByProfessionId(Long id);
+
+    List<Criminal> findCriminalByLastCaseId(Long id);
 }

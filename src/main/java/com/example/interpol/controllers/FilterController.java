@@ -31,7 +31,6 @@ public class FilterController {
         switch (status){
             case "a" -> model.addAttribute("criminals", criminalsService.getCriminalsByStatusId(1L));
             case "p" -> model.addAttribute("criminals", criminalsService.getCriminalsByStatusId(2L));
-            case "o" -> model.addAttribute("criminals", criminalsService.getCriminalsByStatusId(3L));
             case "d" -> model.addAttribute("criminals", criminalsService.getCriminalsByStatusId(4L));
             case "all" -> {
                 return "redirect:/criminals";

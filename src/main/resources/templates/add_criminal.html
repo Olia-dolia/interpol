@@ -12,6 +12,7 @@
 <!--/*@thymesVar id="professions" type="com.example.interpol.entities.Profession"*/-->
 <!--/*@thymesVar id="groups" type="com.example.interpol.entities.CriminalGroup"*/-->
 <!--/*@thymesVar id="languages" type="com.example.interpol.entities.Language"*/-->
+<!--/*@thymesVar id="lastCases" type="com.example.interpol.entities.LastCase"*/-->
 <!--/*@thymesVar id="criminal" type="com.example.interpol.entities.Criminal"*/-->
 <h2 class="text-center">Add Criminal</h2>
 <br>
@@ -53,7 +54,11 @@
     </option>
   </select>
   <label class="form-label" for="last_case">Last case:</label>
-  <input class="form-control" th:filed="*{lastCase}" id="last_case" type="text" name="last_case">
+  <select id="last_case" class="form-select" th:field="*{lastCase}" name="last_case" aria-label="Last Case" type="number" >
+    <option th:value="0">Nothing selected</option>
+    <option th:each="case : ${lastCases}" th:value="${case.id}" th:text="${case.caseName}"></option>
+  </select>
+  <!--<input class="form-control" th:filed="*{lastCase}" id="last_case" type="text" name="last_case">-->
   <label class="form-label"  for="profession">Profession:</label>
   <select id="profession" class="form-select" th:field="*{profession}" name="profession" aria-label="Profession" type="number" >
     <option th:each="p : ${professions}" th:value="${p.getId()}" th:text="${p.getTitle()}"></option>
