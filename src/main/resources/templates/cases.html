@@ -2,49 +2,55 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Criminal Groups</title>
+    <title>All Cases</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/dist/css/bootstrap.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
 <div class="container-lg">
-    <h2 class="text-center">Criminal Groups</h2>
+    <h2 class="text-center">All Cases</h2>
     <br>
     <a href="criminals" class="btn btn-primary" role="button">CRIMINALS</a>
-    <a href="archive" class="btn btn-primary" role="button">ARCHIVE</a>
-    <a href="cases" class="btn btn-primary" role="button">CASES</a>
-    <a href="/groups/add_group" class="btn btn-primary custom" role="button">ADD</a>
+    <a href="archive" class="btn btn-primary custom" role="button">ARCHIVE</a>
     <br>
+    <!--/*@thymesVar id="lastCase" type="com.example.interpol.entities.LastCase"*/-->
+    <form method="post" action="cases/add_case">
+        <h4>Add Case</h4>
+        <label class="form-label" for="name">Case Name:</label>
+        <input class="form-control" id="name" name="name" type="text" required>
+        <label class="form-label" for="description">Description:</label>
+        <input class="form-control" id="description" name="description" type="text" required>
+        <button type="submit" class="btn btn-primary custom">Add</button>
+    </form>
     <table class="table table-sm table-striped table-hover table-bordered align-middle">
         <thead class="table">
-        <tr  class="text-center">
+        <tr class="text-center">
             <td class="td-header">#</td>
-            <td class="td-header">Group Name</td>
+            <td class="td-header">Case Name</td>
             <td class="td-header">Number Of Participants</td>
-            <td class="td-header">Criminal Type</td>
             <td class="td-header">Info</td>
             <td class="td-header">Edit</td>
             <td class="td-header">Delete</td>
         </tr>
         </thead>
         <tbody>
-        <!--/*@thymesVar id="groups" type="com.example.interpol.entities.CriminalGroup"*/-->
-        <tr th:each="group: ${groups}">
-            <td class="text-center" th:text="${group.id}"></td>
-            <td th:text="${group.name}"></td>
-            <td th:text="${group.criminals.size()}"></td>
-            <td th:text="${group.criminalType.nameType}"></td>
+        <!--/*@thymesVar id="cases" type="com.example.interpol.entities.LastCase"*/-->
+        <tr th:each="case: ${cases}">
+            <td class="text-center" th:text="${case.id}"></td>
+            <td th:text="${case.caseName}"></td>
+            <td th:text="${case.criminals.size()}"></td>
             <td class="text-center">
-                <a th:href="@{/groups/group_info/{id}(id=${group.id})}" class="btn btn-sm btn-outline-primary">Show</a>
+                <a th:href="@{/cases/last_case/{id}(id=${case.id})}" class="btn btn-sm btn-outline-primary">Show</a>
             </td>
             <td class="text-center">
-                <a th:href="@{/groups/edit_group(id=${group.id})}" class="btn btn-sm btn-outline-info">Edit</a>
+                <a th:href="@{/cases/edit_case(id=${case.id})}" class="btn btn-sm btn-outline-primary">Edit</a>
             </td>
             <td class="text-center">
-                <span th:if="${group.criminals.size() == 0}"><a class="btn bt-sm btn-outline-danger" data-bs-toggle="modal"
-                                                                   data-bs-target="#myconfirm"
-                                                                   th:attr="data-bs-link=@{/groups/delete_group(id=${group.id})}, data-bs-text=${group.name}, data-bs-id=${group.id}">Delete</a></span>
-                <span th:if="${group.criminals.size() != 0}">Forbidden</span>
+                <span th:if="${case.criminals.size() == 0}"><a class="btn bt-sm btn-outline-danger"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#myconfirm"
+                                                                th:attr="data-bs-link=@{/cases/delete_case(id=${case.id})}, data-bs-text=${case.caseName}, data-bs-id=${case.id}">Delete</a></span>
+                <span th:if="${case.criminals.size() != 0}">Forbidden</span>
             </td>
         </tr>
         </tbody>
@@ -59,7 +65,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this group?<br/>
+                Are you sure you want to delete case?<br/>
                 If you click delete, this action <i>cannot be undone</i>.
             </div>
             <div class="modal-footer">

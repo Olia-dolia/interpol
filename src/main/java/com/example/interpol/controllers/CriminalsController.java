@@ -1,9 +1,6 @@
 package com.example.interpol.controllers;
 
-import com.example.interpol.entities.Criminal;
-import com.example.interpol.entities.CriminalGroup;
-import com.example.interpol.entities.Language;
-import com.example.interpol.entities.Status;
+import com.example.interpol.entities.*;
 import com.example.interpol.services.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,10 +19,11 @@ public class CriminalsController {
     private final StatusService statusService;
     private final ProfessionService professionService;
     private final LanguageService languageService;
+    private final LastCaseService lastCaseService;
 
     @GetMapping
     public String criminals(Model model) {
-        model.addAttribute("criminals", criminalsService.getCriminals());
+        model.addAttribute("criminals", criminalsService.getCriminalsExceptArchive());
         model.addAttribute("status", statusService.findAll());
         model.addAttribute("professions", professionService.findAll());
         model.addAttribute("languages", languageService.findAll());
@@ -48,10 +46,12 @@ public class CriminalsController {
         model.addAttribute("professions", professionService.findAll());
         model.addAttribute("languages", languageService.findAll());
         model.addAttribute("groups", groupService.findAll());
+        model.addAttribute("lastCases", lastCaseService.findAll());
         model.addAttribute("language", new Language());
         model.addAttribute("criminal_group", new CriminalGroup());
         model.addAttribute("status", new Status());
         model.addAttribute("criminal", new Criminal());
+        model.addAttribute("lastCase", new LastCase());
         return "add_criminal";
     }
 
@@ -62,7 +62,7 @@ public class CriminalsController {
                               @RequestParam(value = "languages") long[] languages, @RequestParam("eyes") String eyesColor,
                               @RequestParam("hair") String hairColor, @RequestParam(required = false) Double height, @RequestParam("last_place") String lastPlace,
                               @RequestParam Long criminalGroup, @RequestParam("special_signs") String specialSigns,
-                              @RequestParam("last_case") String lastCase, @RequestParam Long profession,
+                              @RequestParam Long lastCase, @RequestParam Long profession,
                               @RequestParam Long status) {
         System.out.println(criminalGroup);
         criminalsService.addCriminal(firstName, lastName, alias, dateBirth, placeBirth, nationality, languages, eyesColor,
@@ -83,9 +83,11 @@ public class CriminalsController {
         model.addAttribute("professions", professionService.findAll());
         model.addAttribute("languages", languageService.findAll());
         model.addAttribute("groups", groupService.findAll());
+        model.addAttribute("lastCases", lastCaseService.findAll());
         model.addAttribute("language", new Language());
         model.addAttribute("criminal_group", new CriminalGroup());
         model.addAttribute("status", new Status());
+        model.addAttribute("lastCase", new LastCase());
         Optional<Criminal> c = criminalsService.getCriminalById(id);
         if (c.isPresent()) {
             model.addAttribute("criminal", c.get());
@@ -98,10 +100,10 @@ public class CriminalsController {
     public String updateCriminal(@RequestParam("criminal_id") Long id, @RequestParam("first_name") String firstName, @RequestParam("last_name") String lastName,
                                  @RequestParam String alias, @RequestParam("date_birth") String dateBirth,
                                  @RequestParam("place_birth") String placeBirth, @RequestParam String nationality,
-                                 @RequestParam(value = "languages") long[] languages, @RequestParam("eyes") String eyesColor,
+                                 @RequestParam(value = "languages", required = false) long[] languages, @RequestParam("eyes") String eyesColor,
                                  @RequestParam("hair") String hairColor, @RequestParam(required = false) Double height, @RequestParam("last_place") String lastPlace,
                                  @RequestParam Long criminalGroup, @RequestParam("special_signs") String specialSigns,
-                                 @RequestParam("last_case") String lastCase, @RequestParam Long profession,
+                                 @RequestParam Long lastCase, @RequestParam Long profession,
                                  @RequestParam Long status) {
         criminalsService.updateCriminal(id,firstName, lastName, alias, dateBirth, placeBirth, nationality, languages, eyesColor,
                 hairColor, height, lastPlace, criminalGroup,

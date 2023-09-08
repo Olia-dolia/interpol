@@ -12,6 +12,7 @@
     <!--/*@thymesVar id="professions" type="com.example.interpol.entities.Profession"*/-->
     <!--/*@thymesVar id="groups" type="com.example.interpol.entities.CriminalGroup"*/-->
     <!--/*@thymesVar id="languages" type="com.example.interpol.entities.Language"*/-->
+    <!--/*@thymesVar id="lastCases" type="com.example.interpol.entities.LastCase"*/-->
     <!--/*@thymesVar id="criminal" type="com.example.interpol.entities.Criminal"*/-->
     <h2 th:text="Edit + ' ' + Criminal + ' - ' + ${criminal.firstName} + ' &quot' + ${criminal.alias} + '&quot '
                 + ${criminal.lastName}" class="text-center"></h2>
@@ -42,7 +43,7 @@
         <label class="form-label" th:filed="*{hairColor}" for="hair_color">Hair color:</label>
         <input class="form-control" name="hair" id="hair_color" type="text">
         <label class="form-label" th:filed="*{height}" for="height">Height:</label>
-        <input class="form-control" id="height" name="height" type="number">
+        <input class="form-control" id="height" name="height" type="number" step=".1">
         <label class="form-label" for="last_place_residence">Last place of residence:</label>
         <input class="form-control" th:filed="*{lastPlaceOfResidence}" id="last_place_residence"  name="last_place" type="text">
         <label class="form-label" for="special_signs">Special signs:</label>
@@ -54,7 +55,11 @@
             </option>
         </select>
         <label class="form-label" for="last_case">Last case:</label>
-        <input class="form-control" th:filed="*{lastCase}" id="last_case" type="text" name="last_case">
+        <select id="last_case" class="form-select" th:field="*{lastCase}" name="last_case" aria-label="Last Case" type="number" >
+            <option th:value="0">Nothing selected</option>
+            <option th:each="case : ${lastCases}" th:value="${case.id}" th:text="${case.caseName}"></option>
+        </select>
+      <!--  <input class="form-control" th:filed="*{lastCase}" id="last_case" type="text" name="last_case">-->
         <label class="form-label"  for="profession">Profession:</label>
         <select id="profession" class="form-select" th:field="*{profession}" name="profession" aria-label="Profession" type="number" >
             <option th:each="p : ${professions}" th:value="${p.getId()}" th:text="${p.getTitle()}"></option>

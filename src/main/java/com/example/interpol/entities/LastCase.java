@@ -23,10 +23,14 @@ public class LastCase {
     @Column(name = "case_name", nullable = false, unique = true)
     private String caseName;
 
-    @Column(name = "number_of_participants", columnDefinition = "integer default 0")
-    private Integer numberOfParticipants;
+    @Column(name = "description", nullable = false, unique = true)
+    private String description;
 
     @OneToMany(mappedBy = "lastCase", orphanRemoval = true)
     private Set<Criminal> criminals = new LinkedHashSet<>();
 
+    public LastCase(String name, String description) {
+        this.caseName = name;
+        this.description = description;
+    }
 }

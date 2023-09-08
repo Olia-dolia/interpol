@@ -14,8 +14,9 @@
     <!--/*@thymesVar id="languages" type="com.example.interpol.entities.Language"*/-->
     <h2 class="text-center">Internationally Wanted Criminals</h2>
     <br>
-    <a href="/groups" class="btn btn-primary" role="button">GROUPS</a>
-    <a href="/archive" class="btn btn-primary" role="button">ARCHIVE</a>
+    <a href="groups" class="btn btn-primary" role="button">GROUPS</a>
+    <a href="archive" class="btn btn-primary" role="button">ARCHIVE</a>
+    <a href="cases" class="btn btn-primary" role="button">CASES</a>
     <a href="/criminals/add_criminal" class="btn btn-primary custom" role="button">ADD</a>
     <br>
     <form method="get" action="/criminals/filter" class="form-inline" style="margin-top: 10px">
@@ -29,7 +30,6 @@
         <br>
         <button id="filter_status"  th:name="status" th:value="a"  type="submit" class="btn btn-primary">ACTIVE</button>
         <button th:name="status" th:value="p" type="submit" class="btn btn-primary">PRISON</button>
-        <button th:name="status" th:value="o" type="submit" class="btn btn-primary">OUT OF GAME</button>
         <button th:name="status" th:value="d" type="submit" class="btn btn-primary">DEAD</button>
         <button th:name="status" th:value="all" type="submit" class="btn btn-primary custom">ALL</button>
     </form>

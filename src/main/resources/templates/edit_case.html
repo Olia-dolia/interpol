@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Case</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/dist/css/bootstrap.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container-lg">
+  <!--/*@thymesVar id="case" type="com.example.interpol.entities.LastCase"*/-->
+  <h2 th:text="Edit + ' ' + Case + ' &#35' + ${case.id}" class="text-center"></h2>
+  <br>
+  <form method="post" action="edit_case" th:object="${case}">
+    <label class="form-label" for="name">Case Name:</label>
+    <input class="form-control" th:value="${case.caseName}" th:filed="*{caseName}" id="name" name="name" type="text" required>
+    <label class="form-label" for="description">Description:</label>
+    <input class="form-control" th:value="${case.description}" th:filed="*{description}" id="description" name="description" type="text" required>
+    <input type="hidden" name="id" th:value="${case.id}">
+    <a href="/cases" class="btn btn-primary custom" style="float: left" role="button">Back</a>
+    <button type="submit" class="btn btn-primary custom">Update</button>
+  </form>
+</div>
+</body>
+</html>
