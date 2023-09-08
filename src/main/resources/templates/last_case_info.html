@@ -34,7 +34,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr th:if="${case.criminals.empty}">
+            <td colspan="7" class="align-middle"> No Criminals Yet </td>
+        </tr>
             <!--/*@thymesVar id="criminals" type="com.example.interpol.entities.Criminal"*/-->
         <tr th:each="c:${criminals}">
             <td class="text-center" th:text="${c.id}"></td>

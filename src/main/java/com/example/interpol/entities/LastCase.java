@@ -29,4 +29,8 @@ public class LastCase {
     @OneToMany(mappedBy = "lastCase", orphanRemoval = true)
     private Set<Criminal> criminals = new LinkedHashSet<>();
 
+    public LastCase(String name, String description) {
+        this.caseName = name;
+        this.description = description;
+    }
 }

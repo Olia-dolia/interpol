@@ -58,7 +58,6 @@
     <option th:value="0">Nothing selected</option>
     <option th:each="case : ${lastCases}" th:value="${case.id}" th:text="${case.caseName}"></option>
   </select>
-  <!--<input class="form-control" th:filed="*{lastCase}" id="last_case" type="text" name="last_case">-->
   <label class="form-label"  for="profession">Profession:</label>
   <select id="profession" class="form-select" th:field="*{profession}" name="profession" aria-label="Profession" type="number" >
     <option th:each="p : ${professions}" th:value="${p.getId()}" th:text="${p.getTitle()}"></option>

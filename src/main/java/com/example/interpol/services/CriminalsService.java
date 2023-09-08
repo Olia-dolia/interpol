@@ -83,7 +83,7 @@ public class CriminalsService {
     public void updateCriminal(Long id, String firstName, String lastName, String alias,
                                String dateBirth, String placeBirth, String nationality, long[] languages, String eyesColor,
                                String hairColor, Double height, String lastPlace, Long criminalGroup, String specialSigns,
-                               String lastCase, Long profession, Long status) {
+                               Long lastCase, Long profession, Long status) {
         Optional<Criminal> criminal = criminalRepository.findById(id);
         criminal.ifPresent(c -> {
             c.setFirstName(firstName);
@@ -111,7 +111,9 @@ public class CriminalsService {
             c.setLastPlaceOfResidence(lastPlace);
             c.setCriminalGroup(criminalGroupRepository.findById(criminalGroup).get());
             c.setSpecialSigns(specialSigns);
-            c.setLastCase(lastCaseRepository.findByCaseName(lastCase));
+            if(lastCase!=0){
+                c.setLastCase(lastCaseRepository.findById(lastCase).get());
+            } else c.setLastCase(null);
             c.setProfession(professionRepository.findById(profession).get());
             c.setStatus(statusRepository.findById(status).get());
             criminalRepository.save(c);

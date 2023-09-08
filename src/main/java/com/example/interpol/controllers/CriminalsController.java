@@ -83,9 +83,11 @@ public class CriminalsController {
         model.addAttribute("professions", professionService.findAll());
         model.addAttribute("languages", languageService.findAll());
         model.addAttribute("groups", groupService.findAll());
+        model.addAttribute("lastCases", lastCaseService.findAll());
         model.addAttribute("language", new Language());
         model.addAttribute("criminal_group", new CriminalGroup());
         model.addAttribute("status", new Status());
+        model.addAttribute("lastCase", new LastCase());
         Optional<Criminal> c = criminalsService.getCriminalById(id);
         if (c.isPresent()) {
             model.addAttribute("criminal", c.get());
@@ -101,7 +103,7 @@ public class CriminalsController {
                                  @RequestParam(value = "languages", required = false) long[] languages, @RequestParam("eyes") String eyesColor,
                                  @RequestParam("hair") String hairColor, @RequestParam(required = false) Double height, @RequestParam("last_place") String lastPlace,
                                  @RequestParam Long criminalGroup, @RequestParam("special_signs") String specialSigns,
-                                 @RequestParam("last_case") String lastCase, @RequestParam Long profession,
+                                 @RequestParam Long lastCase, @RequestParam Long profession,
                                  @RequestParam Long status) {
         criminalsService.updateCriminal(id,firstName, lastName, alias, dateBirth, placeBirth, nationality, languages, eyesColor,
                 hairColor, height, lastPlace, criminalGroup,
