@@ -20,6 +20,7 @@ public class LastCaseController {
     @GetMapping
     public String cases(Model model){
         model.addAttribute("cases", lastCaseService.findAll());
+        model.addAttribute("case", new LastCase());
         return "cases";
     }
 
